@@ -5,6 +5,7 @@
 PUMA was developed by Shuai Hao in collaboration with Bin Liu, William G.J. Halfond, Ramesh Govindan at [USC](http://www.usc.edu) and Suman Nath at MSR. A thorough description of PUMA can be found at the Networked Systems Lab [project page for PUMA](http://nsl.cs.usc.edu/Projects/PUMA). Any technical questions can be directed to shuai.hao@gmail.com.
 
 ## Running PUMA
+First of all, environment variables like ```JAVA_HOME``` and ```ANDROID_HOME``` should be set up properly.
 
 To run the "app under study", you need to find out the package name and text label for the app. e.g. ```com.abc.apk``` will have ```com.abc``` as package name. "label" will be the text shown after installing it on phone.
 

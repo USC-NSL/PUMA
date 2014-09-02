@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TestApp" default="help">
-
-    <!-- The local.properties file is created and updated by the 'android' tool.
-         It contains the path to the SDK. It should *NOT* be checked into
-         Version Control Systems. -->
-    <property file="local.properties" />
-
-    <!-- The ant.properties file can be created by you. It is only edited by the
-         'android' tool to add properties to it.
-         This is the place to change some Ant specific build properties.
-         Here are some properties you may want to change/update:
-
-         source.dir
-             The name of the source directory. Default is 'src'.
-         out.dir
-             The name of the output directory. Default is 'bin'.
-
-         For other overridable properties, look at the beginning of the rules
-         files in the SDK, at tools/ant/build.xml
-
-         Properties related to the SDK location or the project target should
-         be updated using the 'android' tool with the 'update' action.
-
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems.
-
-         -->
-    <property file="ant.properties" />
-
+    <!-- haos: classpath info for build process. 9/1/14 -->
+    <path id="TestApp.classpath">
+        <fileset dir="${java.home}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="libs">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+    
     <!-- if sdk.dir was not set from one of the property file, then
          get it from the ANDROID_HOME env var.
          This must be done before we load project.properties since
@@ -86,7 +68,23 @@
          In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
          in order to avoid having your file be overridden by tools such as "android update project"
     -->
-    <!-- version-tag: VERSION_TAG -->
+    <!-- version-tag: custom -->
+
+    <!-- haos: customized version of "compile" target. 9/1/14 -->
+    <!-- Compiles this project's .java files into .class files. -->
+    <target name="compile" depends="-build-setup, -pre-compile">
+        <javac encoding="${java.encoding}"
+                source="${java.source}" target="${java.target}"
+                debug="true" extdirs="" includeantruntime="false"
+                destdir="${out.classes.absolute.dir}"
+                bootclasspathref="TestApp.classpath"
+                verbose="${verbose}"
+                fork="${need.javac.fork}">
+            <src path="${source.absolute.dir}" />
+            <compilerarg line="${java.compilerargs}" />
+        </javac>
+    </target>
+
     <import file="${sdk.dir}/tools/ant/uibuild.xml" />
 
 </project>
